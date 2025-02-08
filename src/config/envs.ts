@@ -3,11 +3,15 @@ import * as joi from 'joi';
 
 interface EnvVars {
   NATS_SERVERS: string[];
+  DB_AUTH_URL: string;
+  JWT_SECRET: string;
 }
 
 export const envVarsSchema = joi
   .object({
     NATS_SERVERS: joi.array().items(joi.string()).required(),
+    DB_AUTH_URL: joi.string().required(),
+    JWT_SECRET: joi.string().required(),
   })
   .unknown(true);
 
@@ -24,4 +28,6 @@ const envVars: EnvVars = value;
 
 export const envs = {
   NATS_SERVERS: envVars.NATS_SERVERS,
+  DB_AUTH_URL: envVars.DB_AUTH_URL,
+  JWT_SECRET: envVars.JWT_SECRET,
 };
